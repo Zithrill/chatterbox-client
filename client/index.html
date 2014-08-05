@@ -14,18 +14,20 @@
   </head>
   <body>
     <div id="main">
-      <h1>chatterbox</h1>
-      <div>
-        <input></input>
-        <button class="submit">Send</button>
+      <h1>Chatterbox</h1>
+      <div class="info">
+        <input placeholder="Enter Message Here" class="message"></input>
+        <button class="submitBoard">Send</button>
         <select>
           <option value="allRooms">All Rooms</option>
           <option value="lobby">Lobby</option>
         </select>
+        <input placeholder="Enter New Room Name" class="room"></input>
+        <button class="submitRoom">Create new room</button>
+        <input placeholder="Enter User Name" class="user"></input>
+        <button class="submitUser">Create new User</button>
       </div>
       <!-- Your HTML goes here! -->
-      <ul id="roomSelect">
-      </ul>
       <ul id="chats" class="displayedMessages">
       </ul>
     </div>

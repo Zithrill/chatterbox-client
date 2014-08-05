@@ -42,7 +42,7 @@ app.fetch = function(roomName){
         }
       }
       app.clearMessages();
-      for(var i = 0; i < 10; i++){
+      for(var i = 0; i < 99; i++){
         if(roomName === undefined || results[i].roomname === roomName){
           app.addMessage(results[i]);
         }
@@ -61,19 +61,24 @@ app.clearMessages = function(){/*add clear message method*/
 
 app.addMessage = function(messageObject){
 
-  var username = messageObject.username
-  var msg = messageObject.text
-  if(app.friends.indexOf(messageObject.username) !== -1){
-    $('#chats').append('<li><span class="'+username+' friends" >'+encodeURI(messageObject.username) +'</span>' + ': ' + encodeURI(messageObject.text) + ' time created: ' + messageObject.createdAt + ' room: ' +messageObject.roomname+'</li>');
-  }else{
-    $('#chats').append('<li><span class='+username+'>'+encodeURI(messageObject.username) +'</span>' + ': ' + encodeURI(messageObject.text) + ' time created: ' + messageObject.createdAt + ' room: ' +messageObject.roomname+'</li>');
-  }
+  var username = messageObject.username;
+  var roomName = messageObject.roomname;
+  var msg = messageObject.text;
+  var date = new Date(messageObject.createdAt);
+  var messageToDisplay = username + ': ' + msg + ''
 
-/*add message method*/};
+  $('#chats').append('<li></li>');
+  $('li:last-child').text(messageToDisplay).addClass('' + username).html();
+  $('li:last-child').append('<span></span>')
+  $('span:last-child').addClass('time').text(date.toLocaleTimeString());
+
+  if(app.friends.indexOf(messageObject.username) !== -1){
+    $('li:last-child').addClass('friends');
+  }
+};
 
 app.addRoom = function(roomName){
-/*add room method*/
-  $('#roomSelect').append('<li id='+roomName+'></li>')
+  $('select').append('<option value='+roomName+'>'+roomName+'</option>')
 };
 
 app.addFriend = function(friendName){
@@ -87,29 +92,51 @@ app.init = function(){
 app.init();
 
 $('document').ready(function(){
-  $('.submit').on("click", function(){
+  var interval;
+  $('.submitBoard').on("click", function(){
     var messageToSend = {
       username: window.location.search.slice(10),
-      text: $('input').val()
-      // roomname: app.currentRoom
+      text: $('.message').val(),
+      roomname: app.currentRoom
     }
+    $('.message').val('');
     app.send(messageToSend);
   });
 
-$(document).on('click', 'span', function(){
+  $('.submitRoom').on("click", function(){
+    //make new room here
+    var newRoom = $('.room').val();
+    app.chatRooms.push(newRoom);
+    app.addRoom(newRoom);
+    $('select').val(newRoom);
+    $('select').trigger('change');
+    $('.room').val('');
+  });
+
+$(document).on('click', 'li', function(){
   if(app.friends.indexOf($(this)[0].classList[0]) === -1){
     app.addFriend($(this)[0].classList[0]);
   }
   });
 
 $('select').on('change', function(){
+  var room = $('select :selected').text();
   app.clearMessages();
-  app.fetch($(this).val());
-  window.clearInterval(app.interval);
-  app.interval = window.setInterval(app.fetch($(this).val()), 500);
+  app.currentRoom = room;
+  if(room === "All Rooms"){
+    room = undefined;
+  }
+  app.fetch(room);
+  window.clearInterval(interval);
+  interval = window.setInterval(function(){app.fetch(room)}, 1250);
 });
 
-app.interval = window.setInterval(app.fetch, 500);
+$('.submitUser').on('click', function(){
+  window.location.search = "?username=" + $('.user').val();
+  $('user').val("");
+})
+
+interval = window.setInterval(app.fetch, 1250);
 
 });
 
