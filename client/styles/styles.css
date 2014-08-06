@@ -1,10 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans:700);
 body {
-    background: #9FC4B5;
+    background-image: url("http://wallpapersus.com/wp-content/uploads/2012/03/golden-gate-bridge-san-francisco-lights-architecture-fog-bridges.jpg");
+/*    background-size: contain;*/
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
     text-align: center;
-    padding: 0 25px;
     font-family: 'Lato', sans-serif;
-    color: #591818;
     word-wrap: break-word;
 }
 
@@ -12,10 +15,10 @@ body {
     width: 750px;
     margin: auto;
     text-align: left;
-    background: #9F9FC4;
+    background: black;
+    opacity: 0.75;
     padding: 50px 60px;
-    border: solid #ddd;
-    border-width: 0 1px 1px 1px;
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 1);
 }
 
 #main h1 {
@@ -23,6 +26,8 @@ body {
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
+    font-family: 'Alegreya Sans', sans-serif;
+    color: white;
 }
 
 #main h1 span {
@@ -92,6 +97,7 @@ form input[type=text] {
 li{
     margin-bottom: 10px;
     font-size: 1em;
+    color: white;
 }
 li:hover{
     background-color: #2E8B9E;
@@ -101,6 +107,27 @@ li:hover{
     display: block;
     font-size: 0.50em
 }
+.button {
+  padding:5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid #666;
+  color:#fff;
+  text-decoration:none;
+}
+.info{
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 1em;
+}
+select {
+   background-color: rgba(255, 255, 255, 0.2);
+   width: 268px;
+   padding: 5px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   color: white;
+   -webkit-appearance: none;
+   }
 ul{
     width: auto;
     height: 30em;
@@ -108,23 +135,23 @@ ul{
     list-style-type: none;
 }
 ::-webkit-scrollbar {
-      width: 15px;
+      width: 10px;
 } /* this targets the default scrollbar (compulsory) */
 
 ::-webkit-scrollbar-track {
-      background-color: #b46868;
+    background-color: rgba(255, 255, 255, 0.4);
 } /* the new scrollbar will have a flat appearance with the set background color */
 
 ::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 0.4);
 } /* this will style the thumb, ignoring the track */
 
 ::-webkit-scrollbar-button {
-      background-color: #7c2929;
+      background-color: rgba(255, 255, 255, 0.4);
 } /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
 
 ::-webkit-scrollbar-corner {
-      background-color: black;
+      background-color: rgba(255, 255, 255, 0.4);
 } /* if both the vertical and the horizontal bars appear, then perh
 .info{
     padding: 5px;

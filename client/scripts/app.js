@@ -33,7 +33,6 @@ app.fetch = function () {
       order: '-createdAt',
     },
     success: function (object) {
-      console.log('fetch');
       app.preProcess(object);
       app.lastCheck = object.results[object.results.length-1].objectId;
     },
@@ -46,7 +45,6 @@ app.fetch = function () {
 app.preProcess = function (object) {
   var i = object.results.length-1;
   while(i >= 0 ){
-    console.log('trying to add');
     if(object.results[i].objectId !== app.lastCheck){
       app.updateRoomNamesAndSetMessages(object.results[i]);
       i = i -1;
