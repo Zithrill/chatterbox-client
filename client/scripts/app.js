@@ -63,7 +63,9 @@ app.updateRoomNamesAndSetMessages = function (value) {
   }
   if (app.chatRooms.indexOf(value.roomname) === -1) {
     app.chatRooms.push(value.roomname);
-    $('select').append('<option value=' + value.roomname + '>' + value.roomname + '</option>');
+    $('select').append('<option></option>');
+    $('option:last-child').text(value.roomname).val(value.roomname).html();
+
   }
 };
 
@@ -152,6 +154,7 @@ $('document').ready(function () {
       room = "";
       app.currentRoom = "";
     }
+    app.lastCheck = null;
     app.fetch(room);
     window.clearInterval(interval);
     interval = window.setInterval(function () { app.fetch(); }, 2000);
